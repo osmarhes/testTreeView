@@ -1,0 +1,29 @@
+<div class="list-group" *ngFor="let dir of itens">
+  <div class="list-group-item {{linha == 1 ? 'linha' : ''}}">
+    <div class="row">
+      <div class="col-xs-10 {{linha != 0 ? ('linha_' + (linha + 1)) : ''}}" (click)="dir.toggle()">
+        <i class="glyphicon glyphicon-{{dir.expanded ? 'minus' : 'plus'}}-sign"></i> {{ dir.description }}
+      </div>
+      <div class="col-xs-2">
+        <input type="checkbox" [checked]="dir.checked" (click)="dir.check()" />
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="dir.expanded">
+
+    <div class="list-group-item " *ngFor="let file of dir.files">
+      <div class="row">
+        <div class="col-xs-10 linha_4">
+          {{file.description}}
+        </div>
+        <div class="col-xs-2">
+          <input type="checkbox" [checked]="file.checked" (click)="file.check()" />
+        </div>
+      </div>
+    </div>
+    <tree-view [itens]="dir.itens" [linha]="linha + 1"></tree-view>
+
+  </div>
+
+</div>
